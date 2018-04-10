@@ -1,12 +1,11 @@
 import collections  
 import numpy as np  
 import tensorflow as tf  
-   
-#-------------------------------数据预处理---------------------------#  
+ 
    
 poetry_file ='E:/dataset/NLP/poetry/poetry.txt'  
    
-# 诗集  
+# 诗集,数据预处理 
 poetrys = []  
 with open(poetry_file, "r", encoding='utf-8',) as f:  
     for line in f:  
@@ -38,7 +37,7 @@ words, _ = zip(*count_pairs)
 words = words[:len(words)] + (' ',)  
 # 每个字映射为一个数字ID  
 word_num_map = dict(zip(words, range(len(words))))  
-# 把诗转换为向量形式，参考TensorFlow练习1  
+# 把诗转换为向量形式
 to_num = lambda word: word_num_map.get(word, len(words))  
 poetrys_vector = [ list(map(to_num, poetry)) for poetry in poetrys]  
 
@@ -68,9 +67,6 @@ for i in range(n_chunk):
     y_batches.append(ydata)  
    
    
-#---------------------------------------RNN--------------------------------------#  
-
-
 input_data = tf.placeholder(tf.int32, [batch_size, None])  
 output_targets = tf.placeholder(tf.int32, [batch_size, None])  
 # 定义RNN  
@@ -100,8 +96,8 @@ def neural_network(model='lstm', rnn_size=128, num_layers=2):
     logits = tf.matmul(output, softmax_w) + softmax_b  
     probs = tf.nn.softmax(logits)  
     return logits, last_state, probs, cell, initial_state  
-#训练
 
+#训练
 def train_neural_network():  
     logits, last_state, _, _, _ = neural_network()  
     targets = tf.reshape(output_targets, [-1])  

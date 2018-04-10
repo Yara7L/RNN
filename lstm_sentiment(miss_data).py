@@ -18,7 +18,7 @@ class SentimentLSTM:
         self.stop_words=[]
         self.model=None
     
-    def load_stop_word(self,path=''):
+    def load_stop_word(self,path='E:/dataset/NLP/stopwords'):
         with open(path,'r') as f:
             for line in f:
                 content=line.strip()
@@ -90,7 +90,6 @@ class SentimentLSTM:
         print(vect)
         return self.model.predict_classed(S.pad_sequences(np.array(vect),100))
     
-    @staticmethod
     def build_model():
         model=Sequential()
         model.add(Embedding(vocab_size,256,input_length=sentence_max_len))

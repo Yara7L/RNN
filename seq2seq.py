@@ -26,8 +26,6 @@
 dataset:http://www.manythings.org/anki/
 '''
 # -*- coding: utf-8 -*-
-from __future__ import print_function
-
 from keras.models import Model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
@@ -36,7 +34,7 @@ batch_size = 64
 epochs = 100  
 latent_dim = 256  # Latent dimensionality of the encoding space.
 num_samples = 10000  
-data_path = 'E:/dataset/NLP/seq2seq/fra-eng//fra.txt'
+data_path = 'E:/dataset/NLP/seq2seq/fra-eng/fra.txt'
 
 # Vectorize the data.
 input_texts = []
